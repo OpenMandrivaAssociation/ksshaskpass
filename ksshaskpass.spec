@@ -10,7 +10,6 @@ Patch0:		ksshaskpass-desktop.patch
 BuildRequires:	kdelibs-devel
 Requires:	openssh-clients
 Requires:	ksshagent
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 A KDE version of ssh-askpass with KWallet support.
