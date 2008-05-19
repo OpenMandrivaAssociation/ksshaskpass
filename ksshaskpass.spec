@@ -6,7 +6,6 @@ License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://www.kde-apps.org/CONTENT/content-files/50971-ksshaskpass-%{version}.tar.gz
 Patch0:		ksshaskpass-0.4-mdv-fix_exit.patch
-Patch1:		ksshaskpass-0.4-mdv-fix_install_dir.patch
 Url:		http://www.kde-apps.org/content/show.php?content=50971
 BuildRequires:	kdelibs-devel
 BuildRequires:	cmake
@@ -20,7 +19,6 @@ A KDE version of ssh-askpass with KWallet support.
 %prep
 %setup -qn %{name}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %cmake
@@ -28,7 +26,8 @@ A KDE version of ssh-askpass with KWallet support.
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-pushd build && %makeinstall_std && popd
+mkdir -p %{buildroot}%{_libdir}/ssh/
+cp -p build/src/%{name} %{buildroot}%{_libdir}/ssh/
 
 %post
 update-alternatives --install %_libdir/ssh/ssh-askpass ssh-askpass %{_libdir}/ssh/%{name} 40
