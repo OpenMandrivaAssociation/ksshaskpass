@@ -1,12 +1,13 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	0.3
-Release:	%mkrel 3
-License:	GPL
+Version:	0.4
+Release:	%mkrel 1
+License:	GPLv2+
 Group:		Networking/Remote access
-Source:		http://hanz.nl/download/ksshaskpass-%{version}.tar.gz
-Url:		http://hanz.nl/
-Patch0:		ksshaskpass-desktop.patch
+Source0:	http://www.kde-apps.org/CONTENT/content-files/50971-ksshaskpass-%{version}.tar.gz
+Patch0:		ksshaskpass-0.4-mdv-fix_exit.patch
+Patch1:		ksshaskpass-0.4-mdv-fix_install_dir.patch
+Url:		http://www.kde-apps.org/content/show.php?content=50971
 BuildRequires:	kdelibs-devel
 Requires:	openssh-clients
 Requires:	ksshagent
@@ -17,51 +18,32 @@ A KDE version of ssh-askpass with KWallet support.
 
 %prep
 %setup -qn %{name}-%{version}
-%patch0 -p0 -b .desktop
+%patch0 -p1
+%patch1 -p1
 
 %build
-
-%configure2_5x \
-    --enable-final \
-    --enable-nmcheck \
-    --enable-pch \
-    --disable-rpath \
-    --with-qt-libraries=%{_prefix}/lib/qt3/%{_lib}
-
+%cmake
 %make
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
-%makeinstall_std
-
-%find_lang %{name}
+pushd build && %makeinstall_std && popd
 
 %post
-%{update_menus}
-%if %mdkversion >= 200700
-%{update_desktop_database}
-%update_icon_cache hicolor
-%endif
+update-alternatives --install %_libdir/ssh/ssh-askpass ssh-askpass %{_libdir}/ssh/%{name} 40
+update-alternatives --install %_bindir/ssh-askpass bssh-askpass %{_libdir}/ssh/%{name} 40
 
 %postun
-%{clean_menus}
-%if %mdkversion >= 200700
-%{clean_desktop_database}
-%clean_icon_cache hicolor
-%endif
+[ $1 = 0 ] || exit 0
+update-alternatives --remove ssh-askpass %{_libdir}/ssh/%{name}
+update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING
-%attr(755,root,root)%{_bindir}/%{name}
-%dir %{_datadir}/doc/HTML/en/%{name}
-%{_datadir}/applnk/Utilities/%{name}.desktop
-%{_datadir}/doc/HTML/en/%{name}/*
-%{_datadir}/icons/hicolor/16x16/apps/%{name}.png
-%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%doc TODO ChangeLog
+%attr(755,root,root)%{_libdir}/ssh/%{name}
 
 
