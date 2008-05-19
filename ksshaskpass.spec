@@ -9,6 +9,7 @@ Patch0:		ksshaskpass-0.4-mdv-fix_exit.patch
 Patch1:		ksshaskpass-0.4-mdv-fix_install_dir.patch
 Url:		http://www.kde-apps.org/content/show.php?content=50971
 BuildRequires:	kdelibs-devel
+BuildRequires:	cmake
 Requires:	openssh-clients
 Requires:	ksshagent
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
