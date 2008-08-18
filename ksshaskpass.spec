@@ -18,7 +18,6 @@ A KDE version of ssh-askpass with KWallet support.
 
 %prep
 %setup -qn %{name}-%{version}
-%patch0 -p1
 
 %build
 %cmake
@@ -26,8 +25,8 @@ A KDE version of ssh-askpass with KWallet support.
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-mkdir -p %{buildroot}%{_libdir}/ssh/
-cp -p build/src/%{name} %{buildroot}%{_libdir}/ssh/
+install -D -m0755 build/src/%{name} %{buildroot}%{_libdir}/ssh/%name
+install -D src/%name.1 %buildroot%_mandir/man1/%name.1
 
 %post
 update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_libdir}/ssh/%{name} 40
@@ -45,3 +44,4 @@ update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 %defattr(644,root,root,755)
 %doc TODO ChangeLog
 %attr(755,root,root)%{_libdir}/ssh/%{name}
+%{_mandir}/man1/*
