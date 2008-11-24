@@ -1,7 +1,7 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
 Version:	0.5
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://www.kde-apps.org/CONTENT/content-files/50971-%name-%version.tar.gz
@@ -36,7 +36,7 @@ update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_kde_bindir}
 update-alternatives --remove ssh-askpass %{_kde_bindir}/%{name}
 update-alternatives --remove bssh-askpass %{_kde_bindir}/%{name}
 
-%triggerpostun -- ksshaskpass < 0.5
+%triggerin -- ksshaskpass < 0.5
 update-alternatives --remove ssh-askpass %{_libdir}/ssh/%{name}
 update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 
