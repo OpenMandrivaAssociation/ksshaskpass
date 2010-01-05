@@ -1,7 +1,7 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	0.5.1
-Release:	%mkrel 2
+Version:	0.5.3
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://www.kde-apps.org/CONTENT/content-files/50971-%name-%version.tar.gz
@@ -21,7 +21,7 @@ A KDE version of ssh-askpass with KWallet support.
 %make
 
 %install
-rm -fr %buildroot
+rm -fr %{buildroot}
 %makeinstall_std -C build
 
 %post
@@ -43,6 +43,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog
-%_kde_bindir/*
-%_kde_applicationsdir/*.desktop
-%_mandir/man1/*
+%{_kde_bindir}/*
+%{_kde_applicationsdir}/*.desktop
+%{_mandir}/man1/*
