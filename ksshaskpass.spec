@@ -24,6 +24,15 @@ A KDE version of ssh-askpass with KWallet support.
 rm -fr %{buildroot}
 %makeinstall_std -C build
 
+# fix .desktop file
+# old icon doesn't exist any more
+sed -i s,Icon=.*,Icon=dialog-password,g %{buildroot}%{_kde_applicationsdir}/ksshaskpass.desktop
+
+desktop-file-install --vendor=mandriva \
+		--remove-key="Encoding" \
+		--delete-original \
+		--dir=%{buildroot}%{_kde_applicationsdir} %{buildroot}%{_kde_applicationsdir}/ksshaskpass.desktop
+
 %post
 update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_kde_bindir}/%{name} 40
 update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_kde_bindir}/%{name} 40
