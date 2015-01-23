@@ -9,6 +9,15 @@ Group:		Networking/Remote access
 Source0:	ftp://ftp.kde.org/pub/kde/%{stable}/plasma/%{version}/ksshaskpass-%{version}.tar.xz
 Url:		http://www.kde-apps.org/content/show.php?content=50971
 Requires:	openssh-clients
+BuildRequires:	extra-cmake-modules5
+BuildRequires:	cmake(KF5I18n)
+BuildRequires:	cmake(KF5Pty)
+BuildRequires:	cmake(KF5Wallet)
+BuildRequires:	cmake(KF5CoreAddons)
+BuildRequires:	cmake(KF5WidgetsAddons)
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Widgets)
 
 %description
 A KDE version of ssh-askpass with KWallet support.
