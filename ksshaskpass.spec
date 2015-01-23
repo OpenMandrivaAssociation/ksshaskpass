@@ -18,6 +18,8 @@ BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
+BuildRequires:	cmake
+BuildRequires:	ninja
 
 %description
 A KDE version of ssh-askpass with KWallet support.
