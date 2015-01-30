@@ -2,7 +2,7 @@
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	5.1.95
+Version:	5.2.0
 Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
@@ -34,6 +34,7 @@ ninja
 
 %install
 DESTDIR="%{buildroot}" ninja install -C build
+%find_lang ksshaskpass
 
 %post
 update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_kde_bindir}/%{name} 40
@@ -48,7 +49,7 @@ update-alternatives --remove bssh-askpass %{_kde_bindir}/%{name}
 update-alternatives --remove ssh-askpass %{_libdir}/ssh/%{name}
 update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 
-%files
+%files -f ksshaskpass.lang
 %defattr(-,root,root,-)
 %doc ChangeLog COPYING INSTALL README
 %{_bindir}/*
