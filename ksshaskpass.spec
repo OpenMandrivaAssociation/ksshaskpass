@@ -3,7 +3,7 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
 Version:	5.5.3
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://download.kde.org/%{stable}/plasma/%{version}/ksshaskpass-%{version}.tar.xz
@@ -21,6 +21,7 @@ BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	cmake(ECM)
+Requires(post,postun): update-alternatives
 
 %description
 A KDE version of ssh-askpass with KWallet support.
@@ -37,8 +38,8 @@ A KDE version of ssh-askpass with KWallet support.
 %find_lang ksshaskpass
 
 %post
-update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/%{name} 40
-update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_bindir}/%{name} 40
+update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/%{name} 60
+update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_bindir}/%{name} 60
 
 %postun
 [ $1 = 0 ] || exit 0
