@@ -3,14 +3,13 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
 Version:	5.5.3
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://download.kde.org/%{stable}/plasma/%{version}/ksshaskpass-%{version}.tar.xz
 Url:		http://www.kde-apps.org/content/show.php?content=50971
-Requires:	openssh-clients
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
-Requires:	openssh-askpass-gnome
+Source1:	ssh-askpass-gnome.png
 BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5Pty)
 BuildRequires:	cmake(KF5Wallet)
@@ -21,7 +20,9 @@ BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	cmake(ECM)
+Requires:	openssh-clients
 Requires(post,postun): update-alternatives
+Requires(post):	openssh-askpass-common
 
 %description
 A KDE version of ssh-askpass with KWallet support.
@@ -36,6 +37,9 @@ A KDE version of ssh-askpass with KWallet support.
 %install
 %ninja_install -C build
 %find_lang ksshaskpass
+
+# (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
+install -m644 -D %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/ssh-askpass-gnome.png
 
 %post
 update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/%{name} 60
@@ -55,3 +59,4 @@ update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/*
+%{_datadir}/pixmaps/ssh-askpass-gnome.png
