@@ -2,7 +2,7 @@
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	5.6.5
+Version:	5.7.0
 Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
@@ -36,7 +36,7 @@ A KDE version of ssh-askpass with KWallet support.
 
 %install
 %ninja_install -C build
-%find_lang ksshaskpass
+%find_lang ksshaskpass || touch ksshaskpass.lang
 
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
 install -m644 -D %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/ssh-askpass-gnome.png
@@ -57,6 +57,5 @@ update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 %files -f ksshaskpass.lang
 %doc ChangeLog COPYING INSTALL README
 %{_bindir}/*
-%{_datadir}/applications/*.desktop
 %{_mandir}/man1/*
 %{_datadir}/pixmaps/ssh-askpass-gnome.png
