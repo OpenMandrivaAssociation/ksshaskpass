@@ -21,7 +21,7 @@ BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	cmake(ECM)
 Requires:	openssh-clients
-Requires(post,postun): update-alternatives
+Requires(post,postun): chkconfig
 Requires(post):	openssh-askpass-common
 
 %description
