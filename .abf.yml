@@ -1,4 +1,5 @@
 removed_sources:
   ksshaskpass-5.12.3.tar.xz: aac786e904873c27b62a8a2fd38ebe813229b8cb
-sources:
   ksshaskpass-5.12.6.tar.xz: 82f86ce353f053808060af267f9783a10c9d2ad2
+sources:
+  ksshaskpass-5.12.7.tar.xz: d7b4828c86ed47bd9a2dfdbb2feacd99aefaf32f
