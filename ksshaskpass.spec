@@ -2,7 +2,7 @@
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	5.16.90
+Version:	5.17.0
 Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
