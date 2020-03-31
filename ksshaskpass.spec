@@ -2,11 +2,11 @@
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	5.18.3
-Release:	2
+Version:	5.18.4.1
+Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
-Source0:	http://download.kde.org/%{stable}/plasma/%{version}/ksshaskpass-%{version}.tar.xz
+Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/ksshaskpass-%{version}.tar.xz
 Url:		http://www.kde-apps.org/content/show.php?content=50971
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
 Source1:	ssh-askpass-gnome.png
@@ -28,7 +28,7 @@ Requires(post):	openssh-askpass-common
 A KDE version of ssh-askpass with KWallet support.
 
 %prep
-%setup -q
+%autosetup -p1
 %cmake_kde5
 
 %build
