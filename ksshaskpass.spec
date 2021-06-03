@@ -2,7 +2,7 @@
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
-Version:	5.21.5
+Version:	5.22.0
 Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
@@ -55,7 +55,7 @@ update-alternatives --remove ssh-askpass %{_libdir}/ssh/%{name}
 update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 
 %files -f ksshaskpass.lang
-%doc ChangeLog COPYING INSTALL README
+%doc ChangeLog README
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_datadir}/pixmaps/ssh-askpass-gnome.png
