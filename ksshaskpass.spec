@@ -1,9 +1,9 @@
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
 Version:	5.27.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/ksshaskpass-%{version}.tar.xz
@@ -21,7 +21,7 @@ BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	cmake(ECM)
 Requires:	openssh-clients
-Requires(post,postun): chkconfig
+Requires(post,postun):	chkconfig
 Requires(post):	openssh-askpass-common
 
 %description
@@ -41,6 +41,13 @@ A KDE version of ssh-askpass with KWallet support.
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
 install -m644 -D %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/ssh-askpass-gnome.png
 
+# Setup environment variables
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/
+cat > %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ksshaskpass.sh << EOF
+SSH_ASKPASS=%{_bindir}/ksshaskpass
+export SSH_ASKPASS
+EOF
+
 %post
 update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/%{name} 60
 update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_bindir}/%{name} 60
@@ -56,6 +63,7 @@ update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
 
 %files -f ksshaskpass.lang
 %doc ChangeLog README
+%config(noreplace) %{_sysconfdir}/xdg/plasma-workspace/env/ksshaskpass.sh
 %{_bindir}/*
-%{_mandir}/man1/*
 %{_datadir}/pixmaps/ssh-askpass-gnome.png
+%doc %{_mandir}/man1/*
