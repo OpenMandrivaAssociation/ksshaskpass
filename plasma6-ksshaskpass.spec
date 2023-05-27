@@ -2,7 +2,7 @@
 %define git 20230527
 
 Summary:	SSH-askpass for KDE
-Name:		ksshaskpass
+Name:		plasma6-ksshaskpass
 Version:	5.240.0
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
