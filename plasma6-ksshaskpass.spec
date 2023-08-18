@@ -1,5 +1,5 @@
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230811
+%define git 20230818
 
 Summary:	SSH-askpass for KDE
 Name:		plasma6-ksshaskpass
