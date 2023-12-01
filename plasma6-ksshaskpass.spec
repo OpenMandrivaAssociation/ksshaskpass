@@ -27,8 +27,6 @@ BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Gui)
 BuildRequires:	cmake(Qt6Widgets)
 BuildRequires:	cmake(ECM)
-# NOT the plasma5 version
-BuildRequires:	plasma6-xdg-desktop-portal-kde
 Requires:	openssh-clients
 Requires(post,postun):	chkconfig
 Requires(post):	openssh-askpass-common
