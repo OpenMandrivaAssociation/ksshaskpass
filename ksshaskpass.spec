@@ -3,7 +3,7 @@
 Summary:	SSH-askpass for KDE
 Name:		ksshaskpass
 Version:	5.27.10
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Networking/Remote access
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/ksshaskpass-%{version}.tar.xz
@@ -46,6 +46,8 @@ mkdir -p %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/
 cat > %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ksshaskpass.sh << EOF
 SSH_ASKPASS=%{_bindir}/ksshaskpass
 export SSH_ASKPASS
+SSH_ASKPASS_REQUIRE=prefer
+export SSH_ASKPASS_REQUIRE
 EOF
 
 %post
