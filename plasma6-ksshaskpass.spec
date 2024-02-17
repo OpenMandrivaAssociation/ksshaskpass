@@ -1,14 +1,16 @@
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-#define git 20231103
+%define git 20240217
+%define gitbranch Plasma/6.0
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Summary:	SSH-askpass for KDE
 Name:		plasma6-ksshaskpass
-Version:	5.93.0
+Version:	5.94.0
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Networking/Remote access
 %if 0%{?git:1}
-Source0:	https://invent.kde.org/plasma/ksshaskpass/-/archive/master/ksshaskpass-master.tar.bz2#/ksshaskpass-%{git}.tar.bz2
+Source0:	https://invent.kde.org/plasma/ksshaskpass/-/archive/%{gitbranch}/ksshaskpass-%{gitbranchd}.tar.bz2#/ksshaskpass-%{git}.tar.bz2
 %else
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/ksshaskpass-%{version}.tar.xz
 %endif
@@ -35,7 +37,7 @@ Requires(post):	openssh-askpass-common
 A KDE version of ssh-askpass with KWallet support.
 
 %prep
-%autosetup -p1 -n ksshaskpass-%{?git:master}%{?!git:%{version}}
+%autosetup -p1 -n ksshaskpass-%{?git:%{gitbranchd}}%{?!git:%{version}}
 %cmake \
 	-DBUILD_QCH:BOOL=ON \
 	-DBUILD_WITH_QT6:BOOL=ON \
