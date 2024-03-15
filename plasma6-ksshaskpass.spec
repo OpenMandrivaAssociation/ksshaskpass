@@ -6,7 +6,7 @@
 Summary:	SSH-askpass for KDE
 Name:		plasma6-ksshaskpass
 Version:	6.0.2
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Networking/Remote access
 %if 0%{?git:1}
