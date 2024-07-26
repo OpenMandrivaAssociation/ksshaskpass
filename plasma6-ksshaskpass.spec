@@ -6,7 +6,7 @@
 Summary:	SSH-askpass for KDE
 Name:		plasma6-ksshaskpass
 Version:	6.1.3
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Networking/Remote access
 %if 0%{?git:1}
@@ -62,17 +62,17 @@ export SSH_ASKPASS
 EOF
 
 %post
-update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/%{name} 60
-update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_bindir}/%{name} 60
+update-alternatives --install %{_libdir}/ssh/ssh-askpass ssh-askpass %{_bindir}/ksshaskpass 60
+update-alternatives --install %{_bindir}/ssh-askpass bssh-askpass %{_bindir}/ksshaskpass 60
 
 %postun
 [ $1 = 0 ] || exit 0
-update-alternatives --remove ssh-askpass %{_bindir}/%{name}
-update-alternatives --remove bssh-askpass %{_bindir}/%{name}
+update-alternatives --remove ssh-askpass %{_bindir}/ksshaskpass
+update-alternatives --remove bssh-askpass %{_bindir}/ksshaskpass
 
 %triggerin -- ksshaskpass < 0.5
-update-alternatives --remove ssh-askpass %{_libdir}/ssh/%{name}
-update-alternatives --remove bssh-askpass %{_libdir}/ssh/%{name}
+update-alternatives --remove ssh-askpass %{_libdir}/ssh/ksshaskpass
+update-alternatives --remove bssh-askpass %{_libdir}/ssh/ksshaskpass
 
 %files -f ksshaskpass.lang
 %doc ChangeLog README
