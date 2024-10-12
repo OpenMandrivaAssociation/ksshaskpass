@@ -5,7 +5,7 @@
 
 Summary:	SSH-askpass for KDE
 Name:		plasma6-ksshaskpass
-Version:	6.1.5
+Version:	6.2.0
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Networking/Remote access
@@ -79,4 +79,5 @@ update-alternatives --remove bssh-askpass %{_libdir}/ssh/ksshaskpass
 %config(noreplace) %{_sysconfdir}/xdg/plasma-workspace/env/ksshaskpass.sh
 %{_bindir}/*
 %{_datadir}/pixmaps/ssh-askpass-gnome.png
+%{_datadir}/applications/org.kde.ksshaskpass.desktop
 %doc %{_mandir}/man1/*
