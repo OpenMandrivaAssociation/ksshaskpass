@@ -14,7 +14,7 @@ Source0:	https://invent.kde.org/plasma/ksshaskpass/-/archive/%{gitbranch}/ksshas
 %else
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/ksshaskpass-%{version}.tar.xz
 %endif
-Url:		http://www.kde-apps.org/content/show.php?content=50971
+Url:		https://www.kde-apps.org/content/show.php?content=50971
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
 Source1:	ssh-askpass-gnome.png
 BuildRequires:	cmake(KF6I18n)
