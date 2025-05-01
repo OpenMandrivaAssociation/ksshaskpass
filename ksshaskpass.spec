@@ -4,9 +4,9 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Summary:	SSH-askpass for KDE
-Name:		plasma6-ksshaskpass
+Name:		ksshaskpass
 Version:	6.3.4
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Networking/Remote access
 %if 0%{?git:1}
@@ -32,25 +32,16 @@ BuildRequires:	cmake(ECM)
 Requires:	openssh-clients
 Requires(post,postun):	chkconfig
 Requires(post):	openssh-askpass-common
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+# Renamed 2025-05-01 after 6.0
+%rename plasma6-ksshaskpass
 
 %description
 A KDE version of ssh-askpass with KWallet support.
 
-%prep
-%autosetup -p1 -n ksshaskpass-%{?git:%{gitbranchd}}%{?!git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-%find_lang ksshaskpass || touch ksshaskpass.lang
-
+%install -a
 # (tpg) https://issues.openmandriva.org/show_bug.cgi?id=1459
 install -m644 -D %{SOURCE1} %{buildroot}%{_datadir}/pixmaps/ssh-askpass-gnome.png
 
