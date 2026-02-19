@@ -28,6 +28,7 @@ BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Gui)
 BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Keychain)
 BuildRequires:	cmake(ECM)
 Requires:	openssh-clients
 Requires(post,postun):	chkconfig
